@@ -102,3 +102,7 @@ Info.plist
 *.json
 Assets.xcassets
 TxNotify.xcconfig
+Debug.xcconfig
+Release.xcconfig
+TxNotify-Release.xcconfig
+TxNotify-Debug.xcconfig

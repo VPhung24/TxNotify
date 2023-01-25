@@ -6,18 +6,39 @@
 //
 
 import UIKit
+import Auth
+import WalletConnectRelay
+import WalletConnectNetworking
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        let window = UIWindow(windowScene: windowScene)
-        self.window = window
-        window.makeKeyAndVisible()
+    private let signCoordinator = SignCoordinator()
+    private let authCoordinator = AuthCoordinator()
 
-        window.rootViewController = UINavigationController(rootViewController: ViewController())
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        Networking.configure(projectId: InputConfig.projectId, socketFactory: DefaultSocketFactory())
+        Auth.configure(signerFactory: DefaultSignerFactory())
+
+        setupWindow(scene: scene)
+    }
+
+    private func setupWindow(scene: UIScene) {
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        window = UIWindow(windowScene: windowScene)
+
+        let tabController = UITabBarController()
+        tabController.viewControllers = [
+            signCoordinator.navigationController,
+            authCoordinator.navigationController
+        ]
+
+        signCoordinator.start()
+        authCoordinator.start()
+
+        window?.rootViewController = tabController
+        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
