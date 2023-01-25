@@ -2,6 +2,9 @@
 name: TxNotify
 options:
   bundleIdPrefix: com.vivianphung
+configFiles:
+  Debug: configs/Debug.xcconfig
+  Release: configs/Release.xcconfig
 packages:
   Starscream:
     url: https://github.com/daltoniam/Starscream
@@ -12,10 +15,6 @@ packages:
   WalletConnect:
     url: https://github.com/WalletConnect/WalletConnectSwiftV2
     from: 1.2.0
-  Crypto:
-    url: https://github.com/apple/swift-crypto.git
-    from: 2.0.0
-
 targets:
   TxNotify:
     name: TxNotify
@@ -23,13 +22,16 @@ targets:
     platform: iOS
     deploymentTarget: "14.0"
     scheme: {}
+    configFiles:
+      Debug: configs/TxNotify-Debug.xcconfig
+      Release: configs/TxNotify-Release.xcconfig
     settings:
       base:
         TARGETED_DEVICE_FAMILY: 1
         PRODUCT_BUNDLE_IDENTIFIER: com.vivianphung.TxNotify
         DEVELOPMENT_TEAM: FG655QY4XD
         SUPPORTS_MACCATALYST: NO
-      debug: 
+      debug:
       release:
     sources:
       - path: "TxNotify"
@@ -42,14 +44,31 @@ targets:
         buildPhase: none
       - path: "Info.plist"
         buildPhase: none
+      - path: ".gitignore"
+        buildPhase: none
     dependencies:
       - package: Starscream
       - package: Web3
       - package: WalletConnect
-      - package: Crypto
+        product: WalletConnectChat
+      - package: WalletConnect
+        product: Web3Wallet
+      - package: WalletConnect
+        product: WalletConnectPush
+      - package: WalletConnect
+        product: WalletConnectEcho
+      - package: WalletConnect
+        product: WalletConnectPairing
+      - package: WalletConnect
+        product: WalletConnectNetworking
+      - package: WalletConnect
+        product: WalletConnectRouter
+      - package: WalletConnect
+        product: WalletConnectVerify
     info:
       path: Info.plist
       properties:
+        PROJECT_ID: $(PROJECT_ID)
         UILaunchScreen:
           UIColorName: LaunchBackground
           UIImageName: AppIcon
@@ -61,11 +80,11 @@ targets:
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
         UIApplicationSceneManifest:
-           UIApplicationSupportsMultipleScenes: false
-           UISceneConfigurations:
-             UIWindowSceneSessionRoleApplication:
-               - UISceneConfigurationName: Default Configuration
-                 UISceneDelegateClassName: $(PRODUCT_MODULE_NAME).SceneDelegate
+          UIApplicationSupportsMultipleScenes: false
+          UISceneConfigurations:
+            UIWindowSceneSessionRoleApplication:
+              - UISceneConfigurationName: Default Configuration
+                UISceneDelegateClassName: $(PRODUCT_MODULE_NAME).SceneDelegate
     entitlements:
       path: TxNotify.entitlements
       properties:

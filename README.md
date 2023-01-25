@@ -1,12 +1,13 @@
 # TxNotify
 
+[pending] written for web. now native with wallet connect 
+
 Subscribe to any address's pending transaction
 
 Uses:
 
 - [XcodeGen](https://github.com/yonaskolb/XcodeGen)
 - [Alchemy](https://dashboard.alchemy.com)
--
 
 n the project directory, run
 
