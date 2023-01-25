@@ -99,15 +99,6 @@ class ConnectViewController: UIViewController, UITableViewDataSource, UITableVie
                     "personal_sign",
                     "eth_signTypedData"
                 ], events: [], extensions: nil
-            ),
-            "solana": ProposalNamespace(
-                chains: [
-                    Blockchain("solana:4sGjMW1sUnHzSxGspuhpqLDx6wiyjNtZ")!
-                ],
-                methods: [
-                    "solana_signMessage",
-                    "solana_signTransaction"
-                ], events: [], extensions: nil
             )
         ]
         Task {

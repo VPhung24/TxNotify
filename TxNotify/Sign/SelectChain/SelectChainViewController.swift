@@ -24,8 +24,7 @@ class SelectChainViewController: UIViewController, UITableViewDataSource {
 
     let chains = [
         Chain(name: "Ethereum", id: "eip155:1"),
-        Chain(name: "Polygon", id: "eip155:137"),
-        Chain(name: "Solana", id: "solana:4sGjMW1sUnHzSxGspuhpqLDx6wiyjNtZ")
+        Chain(name: "Polygon", id: "eip155:137")
     ]
 
     override func viewDidLoad() {
@@ -53,15 +52,6 @@ class SelectChainViewController: UIViewController, UITableViewDataSource {
                     "eth_sendTransaction",
                     "personal_sign",
                     "eth_signTypedData"
-                ], events: [], extensions: nil
-            ),
-            "solana": ProposalNamespace(
-                chains: [
-                    Blockchain("solana:4sGjMW1sUnHzSxGspuhpqLDx6wiyjNtZ")!
-                ],
-                methods: [
-                    "solana_signMessage",
-                    "solana_signTransaction"
                 ], events: [], extensions: nil
             )
         ]
